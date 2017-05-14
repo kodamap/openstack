@@ -1,0 +1,6 @@
+CREATE DATABASE manila;
+
+GRANT ALL PRIVILEGES ON manila.* TO 'manila'@'localhost' \
+  IDENTIFIED BY 'MANILA_DBPASS';
+GRANT ALL PRIVILEGES ON manila.* TO 'manila'@'%' \
+  IDENTIFIED BY 'MANILA_DBPASS';

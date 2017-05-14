@@ -1,0 +1,6 @@
+CREATE DATABASE aodh;
+
+GRANT ALL PRIVILEGES ON aodh.* TO 'aodh'@'localhost' \
+    IDENTIFIED BY 'AODH_DBPASS';
+GRANT ALL PRIVILEGES ON aodh.* TO 'aodh'@'%' \
+    IDENTIFIED BY 'AODH_DBPASS';
