@@ -57,6 +57,16 @@ echo
 echo "** Installing the packages..."
 echo
 
+# To configure prerequisites
+# Enable the OpenStack repository
+if [ ! -f /etc/yum.repos.d/CentOS-OpenStack-ocata.repo ] ; then
+    yum install centos-release-openstack-ocata -y
+fi
+
+# RHEL and CentOS enable SELinux by default. Install the openstack-selinux package to
+# automatically manage security policies for OpenStack services:
+yum -y install openstack-selinux
+
 # Install the LVM packages:
 yum -y install lvm2 openstack-utils
 
@@ -93,9 +103,9 @@ test ! -f ${CONF}.org && cp -p ${CONF} ${CONF}.org
 openstack-config --set ${CONF} database connection mysql+pymysql://cinder:${CINDER_DBPASS}@${controller}/cinder
 
 # In the [DEFAULT] ,configure RabbitMQ message queue access:
-#openstack-config --set ${CONF} DEFAULT transport_url rabbit://openstack:${RABBIT_PASS}@{controller}
+#openstack-config --set ${CONF} DEFAULT transport_url rabbit://openstack:${RABBIT_PASS}@${controller}
 ## for rdo
-openstack-config --set ${CONF} DEFAULT transport_url rabbit://guest:guest@{controller}
+openstack-config --set ${CONF} DEFAULT transport_url rabbit://guest:guest@${controller}
 
 # In the [DEFAULT] and [keystone_authtoken] sections, configure Identity service access:
 # Note : Comment out or remove any other options in the [keystone_authtoken] section.
@@ -163,7 +173,7 @@ fi
 
 controller=$1
 block=$2
-iscsi_ip_address $3
+iscsi_ip_address=$3
 
 ssh-copy-id root@${block}
 generate_cinder_sh

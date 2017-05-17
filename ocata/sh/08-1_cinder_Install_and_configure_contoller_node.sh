@@ -143,7 +143,7 @@ install_and_configure_components () {
 
   # In the [DEFAULT] section, configure the my_ip option to use the management interface
   openstack-config --set ${CONF} DEFAULT my_ip ${controller}
-u
+
   # In the [oslo_concurrency] section, configure the lock path:
   openstack-config --set ${CONF} oslo_concurrency lock_path /var/lib/cinder/tmp
 
