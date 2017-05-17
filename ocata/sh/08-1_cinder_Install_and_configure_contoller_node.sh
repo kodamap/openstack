@@ -193,7 +193,7 @@ finalize_installation() {
 
   sleep 5;
 
-  openstack volume service list"
+  openstack volume service list
 }
 
 ## main
