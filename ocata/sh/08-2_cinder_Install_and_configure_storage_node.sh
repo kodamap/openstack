@@ -83,10 +83,10 @@ echo
 echo "** Editting ${CONF}..."
 echo
 
-test ! -f ${CONF}.org && cp -p ${CONF} ${CONF}.org
-pvcreate /dev/vdb --force
-vgcreate cinder-volumes /dev/vdb
-sed -i '141a \ \ \ \ \ \ \ \ filter = [ "a/vdb/", "r/.*/"]' ${CONF}
+#test ! -f ${CONF}.org && cp -p ${CONF} ${CONF}.org
+#pvcreate /dev/vdb --force
+#vgcreate cinder-volumes /dev/vdb
+#sed -i '141a \ \ \ \ \ \ \ \ filter = [ "a/vdb/", "r/.*/"]' ${CONF}
 
 # Install and configure Block Storage volume components
 yum -y install openstack-cinder targetcli python-keystone
